@@ -8,8 +8,7 @@
 
 - name: Convert ASCII key to binary .gpg format
   ansible.builtin.command: >
-    gpg --dearmor /etc/apt/trusted.gpg.d/{{ item.name }}.asc
-    --output /etc/apt/trusted.gpg.d/{{ item.name }}.gpg
+    gpg --dearmor --output /etc/apt/trusted.gpg.d/{{ item.name }}.gpg /etc/apt/trusted.gpg.d/{{ item.name }}.asc 
   args:
     creates: "/etc/apt/trusted.gpg.d/{{ item.name }}.gpg"
   loop: "{{ mysql_gpg_keys }}"
